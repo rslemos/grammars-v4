@@ -16,6 +16,18 @@ CREATE TABLE dbo.TestTable (
   WITH (DATA_COMPRESSION = PAGE)
 GO
 
+-- Create Table Identity
+CREATE TABLE dbo.TestTable (
+  TableID int identity primary key
+)
+GO
+
+-- Create Table Identity (any order)
+CREATE TABLE dbo.TestTable (
+  TableID int primary key identity
+)
+GO
+
 -- Alter table drop constraint in transaction
 IF NOT EXISTS (SELECT * FROM sys.columns cols
   JOIN sys.types AS types ON cols.user_type_id = types.user_type_id
