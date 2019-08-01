@@ -2613,6 +2613,7 @@ grant_permission
     | REFERENCES
     | INSERT
     | ALTER (ANY? (id | DATABASE))?
+    | DELETE
     ;
 
 // https://msdn.microsoft.com/en-us/library/ms190356.aspx
