@@ -2614,6 +2614,7 @@ grant_permission
     | INSERT
     | ALTER (ANY? (id | DATABASE))?
     | DELETE
+    | UPDATE
     ;
 
 // https://msdn.microsoft.com/en-us/library/ms190356.aspx
