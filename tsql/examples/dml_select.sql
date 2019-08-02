@@ -742,3 +742,7 @@ FROM   OPENXML (@idoc, '/ROOT/Customer/Order/OrderDetail',2)
                OrderDate   datetime    '../@OrderDate',   
                ProdID      int         '@ProductID',   
                Qty         int         '@Quantity');  
+
+-- SELECT with unreserved keywords as alias
+
+SELECT urlSite AS URL, OrderDate AS DATA, ErrorID AS Error;
