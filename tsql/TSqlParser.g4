@@ -63,6 +63,7 @@ dml_clause
     | insert_statement
     | select_statement
     | update_statement
+    | updatetext_statement
     ;
 
 // Data Definition Language: https://msdn.microsoft.com/en-us/library/ff848799.aspx)
@@ -1831,6 +1832,23 @@ output_dml_list_elem
 output_column_name
     : (DELETED | INSERTED | table_name) '.' ('*' | id)
     | DOLLAR_ACTION
+    ;
+
+// https://docs.microsoft.com/en-us/sql/t-sql/queries/updatetext-transact-sql?view=sql-server-2017
+updatetext_statement
+    : UPDATETEXT BULK? table_name '.' dest_column_name=id dest_text_ptr=updatetext_ptr
+      insert_offset=expression delete_length=expression (WITH LOG)?
+      inserted_data
+    ;
+
+updatetext_ptr
+    : primitive_expression
+    | function_call
+    ;
+
+inserted_data
+    : expression
+    | table_name '.' src_column_name=id src_text_ptr=updatetext_ptr
     ;
 
 // DDL
