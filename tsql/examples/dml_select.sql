@@ -540,6 +540,12 @@ GO
 SELECT TOP 10.5 PERCENT *
 FROM Production.Product
 ORDER BY Name ASC;
+-- TOP with integral percentage.
+USE AdventureWorks2012;
+GO
+SELECT TOP 10 PERCENT *
+FROM Production.Product
+ORDER BY Name ASC;
 -- Alternate way.
 USE AdventureWorks2012;
 GO

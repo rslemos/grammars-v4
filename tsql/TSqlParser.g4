@@ -2922,7 +2922,7 @@ top_clause
     ;
 
 top_percent
-    : (REAL | FLOAT) PERCENT
+    : (DECIMAL | REAL | FLOAT) PERCENT
     | '(' expression ')' PERCENT
     ;
 
