@@ -3580,6 +3580,8 @@ default_value
 // https://msdn.microsoft.com/en-us/library/ms179899.aspx
 constant
     : STRING // string, datetime or uniqueidentifier
+    | IPV4_ADDR // must have ' (guard against naked IPV4_ADDR)
+    | IPV6_ADDR // must have ' (guard against naked IPV6_ADDR)
     | BINARY
     | sign? DECIMAL
     | sign? (REAL | FLOAT)  // float or decimal

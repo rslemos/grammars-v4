@@ -191,7 +191,7 @@ INSTEAD:                               'INSTEAD';
 INTERSECT:                             'INTERSECT';
 INTO:                                  'INTO';
 IPV4_ADDR:                             [']? IPV4_OCTECT DOT IPV4_OCTECT DOT IPV4_OCTECT DOT IPV4_OCTECT [']?;
-IPV6_ADDR:                              [']?[0-9A-F]?[0-9A-F]?[0-9A-F]?[0-9A-F]?[:][0-9A-F]?[0-9A-F]?[0-9A-F]?[0-9A-F]?[:][0-9A-F]?[0-9A-F]?[0-9A-F]?[0-9A-F]?[:][0-9A-F]?[0-9A-F]?[0-9A-F]?[0-9A-F]?[:][0-9A-F]?[0-9A-F]?[0-9A-F]?[0-9A-F]?[:][0-9A-F]?[0-9A-F]?[0-9A-F]?[0-9A-F]?[:][0-9A-F]?[0-9A-F]?[0-9A-F]?[0-9A-F]?[:][0-9A-F]?[0-9A-F]?[0-9A-F]?[0-9A-F]?[']?;
+IPV6_ADDR:                              [']?[0-9A-Fa-f]?[0-9A-Fa-f]?[0-9A-Fa-f]?[0-9A-Fa-f]?[:][0-9A-Fa-f]?[0-9A-Fa-f]?[0-9A-Fa-f]?[0-9A-Fa-f]?[:][0-9A-Fa-f]?[0-9A-Fa-f]?[0-9A-Fa-f]?[0-9A-Fa-f]?[:][0-9A-Fa-f]?[0-9A-Fa-f]?[0-9A-Fa-f]?[0-9A-Fa-f]?[:][0-9A-Fa-f]?[0-9A-Fa-f]?[0-9A-Fa-f]?[0-9A-Fa-f]?[:][0-9A-Fa-f]?[0-9A-Fa-f]?[0-9A-Fa-f]?[0-9A-Fa-f]?[:][0-9A-Fa-f]?[0-9A-Fa-f]?[0-9A-Fa-f]?[0-9A-Fa-f]?[:][0-9A-Fa-f]?[0-9A-Fa-f]?[0-9A-Fa-f]?[0-9A-Fa-f]?[']?;
 IS:                                    'IS';
 ISNULL:                                'ISNULL';
 JOIN:                                  'JOIN';
@@ -872,7 +872,7 @@ BIT_AND:             '&';
 BIT_XOR:             '^';
 
 fragment LETTER:       [A-Z_];
-fragment IPV6_OCTECT:  [0-9A-F][0-9A-F][0-9A-F][0-9A-F];
+fragment IPV6_OCTECT:  [0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f];
 IPV4_OCTECT:           [0-9]?[0-9]?[0-9];
 fragment DEC_DOT_DEC:  (DEC_DIGIT+ '.' DEC_DIGIT+ |  DEC_DIGIT+ '.' | '.' DEC_DIGIT+);
 fragment HEX_DIGIT:    [0-9A-F];

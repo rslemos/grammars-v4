@@ -752,3 +752,7 @@ FROM   OPENXML (@idoc, '/ROOT/Customer/Order/OrderDetail',2)
 -- SELECT with unreserved keywords as alias
 
 SELECT urlSite AS URL, OrderDate AS DATA, ErrorID AS Error;
+
+-- SELECT IPv4 and IPv6 addresses
+
+SELECT '10.0.0.1' AS IPv4, 'ff02::2' AS IPv6;
