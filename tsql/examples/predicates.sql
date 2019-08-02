@@ -269,3 +269,77 @@ SELECT FirstName, LastName, Shift
 FROM HumanResources.vEmployeeDepartmentHistory
 WHERE Department = 'Quality Assurance'
    AND (Shift = 'Evening' OR Shift = 'Night');
+
+-----------------------------------------------------------------------
+-- CONTAINS https://docs.microsoft.com/en-us/sql/t-sql/queries/contains-transact-sql?view=sql-server-2017
+
+--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+-- A. Using CONTAINS with <simple_term>
+
+USE AdventureWorks2012;  
+GO  
+SELECT Name, ListPrice  
+FROM Production.Product  
+WHERE ListPrice = 80.99  
+   AND CONTAINS(Name, 'Mountain');  
+GO
+
+SELECT Name, ListPrice  
+FROM Production.Product  
+WHERE ListPrice = 80.99  
+   AND CONTAINS(Production.Product.*, 'Mountain');  
+GO
+
+--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+-- B. Using CONTAINS and phrase with <simple_term>
+
+
+--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+-- C. Using CONTAINS with <prefix_term>
+
+
+--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+-- D. Using CONTAINS and OR with <prefix_term>
+
+
+--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+-- E. Using CONTAINS with <proximity_term>
+
+
+--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+-- F. Using CONTAINS with <generation_term>
+
+
+--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+-- G. Using CONTAINS with <weighted_term>
+
+
+--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+-- H. Using CONTAINS with variables
+
+USE AdventureWorks2012;  
+GO  
+DECLARE @SearchWord nvarchar(30)  
+SET @SearchWord = N'Performance'  
+SELECT Description   
+FROM Production.ProductDescription   
+WHERE CONTAINS(Description, @SearchWord);  
+GO  
+
+
+--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+-- I. Using CONTAINS with a logical operator (AND)
+
+
+--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+-- J. Using CONTAINS to verify a row insertion
+
+
+--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+-- K. Querying on a document property
+Use AdventureWorks2012;  
+GO  
+SELECT Document 
+FROM Production.Document  
+WHERE CONTAINS(PROPERTY(Document,'Title'), 'Maintenance OR Repair');  
+GO

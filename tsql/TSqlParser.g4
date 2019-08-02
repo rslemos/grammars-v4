@@ -2889,6 +2889,7 @@ predicate
     | expression NOT? IN '(' (subquery | expression_list) ')'
     | expression NOT? LIKE expression (ESCAPE expression)?
     | expression IS null_notnull
+    | CONTAINS '(' ((table_name '.')? (column_name=id) | '(' column_name_list ')' | asterisk | PROPERTY '(' property_column_name=id ',' property_name=expression ')' ) ',' contains_search_condition=expression ')'
     | '(' search_condition ')'
     ;
 
