@@ -175,6 +175,7 @@ ddl_clause
     | drop_cryptograhic_provider
     | drop_database
     | drop_database_audit_specification
+    | drop_database_encryption_key
     | drop_database_scoped_credential
     | drop_db_role
     | drop_default
@@ -749,6 +750,11 @@ drop_database_audit_specification
     : DROP DATABASE AUDIT SPECIFICATION audit_specification_name=id
     ;
 
+// https://docs.microsoft.com/en-us/sql/t-sql/statements/drop-database-encryption-key-transact-sql?view=sql-server-2017
+drop_database_encryption_key
+   : DROP DATABASE ENCRYPTION KEY
+   ;
+
 // https://docs.microsoft.com/en-us/sql/t-sql/statements/drop-database-scoped-credential-transact-sql
 drop_database_scoped_credential
    : DROP DATABASE SCOPED CREDENTIAL credential_name=id
@@ -1263,7 +1269,7 @@ alter_resource_governor
 // https://docs.microsoft.com/en-us/sql/t-sql/statements/alter-role-transact-sql
 alter_db_role
     : ALTER ROLE role_name=id
-        ( (ADD|DROP) MEMBER database_principal=id
+        ( (ADD|DROP) MEMBER database_principal
         | WITH NAME EQUAL new_role_name=id )
     ;
 
@@ -1299,13 +1305,13 @@ alter_schema_sql
 create_schema
     : CREATE SCHEMA
 	(schema_name=id
-        |AUTHORIZATION owner_name=id
-        | schema_name=id AUTHORIZATION owner_name=id
+        |AUTHORIZATION owner_name=database_principal
+        | schema_name=id AUTHORIZATION owner_name=database_principal
         )
         (create_table
          |create_view
-         | (GRANT|DENY) (SELECT|INSERT|DELETE|UPDATE) ON (SCHEMA COLON COLON)? object_name=id TO owner_name=id
-         | REVOKE (SELECT|INSERT|DELETE|UPDATE) ON (SCHEMA COLON COLON)? object_name=id FROM owner_name=id
+         | (GRANT|DENY) (SELECT|INSERT|DELETE|UPDATE) ON (SCHEMA COLON COLON)? object_name=id TO owner_name=database_principal
+         | REVOKE (SELECT|INSERT|DELETE|UPDATE) ON (SCHEMA COLON COLON)? object_name=id FROM owner_name=database_principal
         )*
     ;
 
@@ -2532,13 +2538,18 @@ security_statement
     // https://msdn.microsoft.com/en-us/library/ms188354.aspx
     : execute_clause ';'?
     // https://msdn.microsoft.com/en-us/library/ms187965.aspx
-    | GRANT (ALL PRIVILEGES? | grant_permission ('(' column_name_list ')')?) (ON on_id=table_name)? TO (to_principal+=id) (',' to_principal+=id)* (WITH GRANT OPTION)? (AS as_principal=id)? ';'?
+    | GRANT (ALL PRIVILEGES? | grant_permission ('(' column_name_list ')')?) (ON on_id=table_name)? TO (to_principal+=database_principal) (',' to_principal+=database_principal)* (WITH GRANT OPTION)? (AS as_principal=database_principal)? ';'?
     // https://msdn.microsoft.com/en-us/library/ms178632.aspx
     | REVERT ('(' WITH COOKIE '=' LOCAL_ID ')')? ';'?
     | open_key
     | close_key
     | create_key
     | create_certificate
+    ;
+
+database_principal
+    : id
+    | PUBLIC
     ;
 
 create_certificate
@@ -2808,6 +2819,7 @@ set_special
     | SET ANSI_PADDING on_off
     | SET ANSI_WARNINGS on_off
     | SET modify_method
+    | SET ROWCOUNT rowcount=DECIMAL
     ;
 
 constant_LOCAL_ID
@@ -3753,7 +3765,6 @@ simple_id
     | FILENAME
     | FILEPATH
     | FILESTREAM
-    | FILLFACTOR
     | FILTER
     | FIRST
     | FIRST_VALUE
@@ -3797,7 +3808,6 @@ simple_id
     | KB
     | KEEP
     | KEEPFIXED
-    | KEY
     | KEY_SOURCE
     | KEYS
     | KEYSET
@@ -3873,7 +3883,6 @@ simple_id
     | OBJECT
     | OFFLINE
     | OFFSET
-    | OFFSETS
     | OLD_ACCOUNT
     | ONLINE
     | ONLY
@@ -3905,7 +3914,6 @@ simple_id
     | PROPERTY
     | PROVIDER
     | PROVIDER_KEY_NAME
-    | PUBLIC
     | QUERY
     | QUEUE
     | QUEUE_DELAY
@@ -3943,14 +3951,12 @@ simple_id
     | RESOURCE_MANAGER_LOCATION
     | RESTRICTED_USER
     | RETENTION
-    | RETURN
     | RETURNS
     | ROBUST
     | ROOT
     | ROUTE
     | ROW
     | ROW_NUMBER
-    | ROWCOUNT
     | ROWGUID
     | ROWS
     | SAFETY
