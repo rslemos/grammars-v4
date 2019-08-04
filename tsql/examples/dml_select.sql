@@ -755,4 +755,4 @@ SELECT urlSite AS URL, OrderDate AS DATA, ErrorID AS Error;
 
 -- SELECT IPv4 and IPv6 addresses
 
-SELECT '10.0.0.1' AS IPv4, 'ff02::2' AS IPv6;
+SELECT 'ff02::2' AS IPv6, '10.0.0.1' AS IPv4;
