@@ -2819,7 +2819,7 @@ set_special
     | SET ANSI_PADDING on_off
     | SET ANSI_WARNINGS on_off
     | SET modify_method
-    | SET ROWCOUNT rowcount=DECIMAL
+    | SET ROWCOUNT rowcount=constant_LOCAL_ID
     ;
 
 constant_LOCAL_ID
